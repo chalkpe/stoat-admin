@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "bun run build:server && node server/.build/server/index.js",
     "build": "bun run build:server && bun run build:client",
-    "build:server": "cd server && (rm -r .build ||:) && tsc && cd ..",
+    "build:server": "cd server && rm -rf .build && tsc && cd ..",
     "build:client": "next build",
     "start": "NODE_ENV=production node server/.build/server/index.js",
     "lint": "next lint"
