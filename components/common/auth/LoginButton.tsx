@@ -4,9 +4,12 @@ import { useAuthorisedUser } from "@/lib/auth/user";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 
-import { Button, Flex } from "@radix-ui/themes";
+import { Button, Flex, TextField } from "@radix-ui/themes";
+import { useState } from "react";
 
 export function LoginButton() {
+  const [value, setValue] = useState("");
+
   if (process.env.NEXT_PUBLIC_AUTH_TYPE === "none") {
     return (
       <Button color="ruby" asChild>
@@ -30,21 +33,23 @@ export function LoginButton() {
     );
   }
 
-  const callbackUrl =
-    typeof window !== "undefined"
-      ? new URLSearchParams(document.location.search).get("callbackUrl") ??
-        undefined
-      : undefined;
-
   return (
-    <Button
-      onClick={() =>
-        signIn("authentik", {
-          callbackUrl,
-        })
-      }
-    >
-      Login with Stoat SSO
-    </Button>
+    <Flex gap="4" justify="center">
+      <TextField.Root
+        value={value}
+        className="grow"
+        onChange={(e) => setValue(e.currentTarget.value)}
+      />
+      <Button
+        onClick={() =>
+          signIn("credentials", {
+            redirect: false,
+            password: value,
+          })
+        }
+      >
+        Login
+      </Button>
+    </Flex>
   );
 }

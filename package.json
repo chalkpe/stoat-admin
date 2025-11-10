@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --exec \"bun run build:server && NODE_EXTRA_CA_CERTS=$PWD/revolt.crt node server/.build/server/index.js\" -e ts --watch server",
+    "dev": "nodemon --exec \"bun run build:server && node server/.build/server/index.js\" -e ts --watch server",
     "build": "bun run build:server && bun run build:client",
     "build:server": "cd server && (rm -r .build ||:) && tsc && cd ..",
     "build:client": "next build",
-    "start": "NODE_EXTRA_CA_CERTS=$PWD/revolt.crt NODE_ENV=production node server/.build/server/index.js",
+    "start": "NODE_ENV=production node server/.build/server/index.js",
     "lint": "next lint"
   },
   "dependencies": {

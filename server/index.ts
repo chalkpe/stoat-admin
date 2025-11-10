@@ -35,15 +35,15 @@ async function printVersion() {
 }
 
 async function loadModules() {
-  const log = createLogger(bgRed(" Modules "));
-  const modules = await readdir(resolve("server/.build/server/modules"));
-  log(`Found ${modules.length} modules!`);
+  // const log = createLogger(bgRed(" Modules "));
+  // const modules = await readdir(resolve("server/.build/server/modules"));
+  // log(`Found ${modules.length} modules!`);
 
-  for (const moduleName of modules) {
-    if (moduleName === "_disabled") continue;
-    log(gray(`Initialising ${moduleName}`));
-    require(resolve(`server/.build/server/modules/${moduleName}/index.js`));
-  }
+  // for (const moduleName of modules) {
+  //   if (moduleName === "_disabled") continue;
+  //   log(gray(`Initialising ${moduleName}`));
+  //   require(resolve(`server/.build/server/modules/${moduleName}/index.js`));
+  // }
 }
 
 async function startApp() {

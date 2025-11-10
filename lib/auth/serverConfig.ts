@@ -1,15 +1,21 @@
 import type { AuthOptions } from "next-auth";
-import AuthentikProvider from "next-auth/providers/authentik";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 /**
  * Authentication options
  */
 export const authOptions: AuthOptions = {
   providers: [
-    AuthentikProvider({
-      clientId: process.env.AUTHENTIK_ID!,
-      clientSecret: process.env.AUTHENTIK_SECRET!,
-      issuer: process.env.AUTHENTIK_ISSUER!,
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        password: {  label: "Password", type: "password" }
+      },
+      async authorize(credentials, req) {
+        return credentials?.password === process.env.ADMIN_PASSWORD
+          ? { id: "admin", name: "Admin", email: "owner@example.com" }
+          : null;
+      }
     }),
   ],
   jwt: {
