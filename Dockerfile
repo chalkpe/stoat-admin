@@ -8,4 +8,4 @@ COPY . .
 RUN bun install --frozen-lockfile
 
 EXPOSE 3000/tcp
-ENTRYPOINT [ "sh", "-c", "ulimit -n 65536 && bun run dev" ]
+ENTRYPOINT [ "bash", "-c", "ulimit -n 65536 && bun run dev" ]
