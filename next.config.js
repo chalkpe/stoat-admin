@@ -4,6 +4,7 @@ const nextConfig = {
     reactCompiler: true,
   },
   webpack: (config, { dev, isServer, webpack, nextRuntime }) => {
+    config.watch = false;
     config.module.rules.push({
       test: /\.node$/,
       use: [
