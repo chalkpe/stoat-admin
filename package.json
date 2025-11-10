@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "bun run build:server && node server/.build/server/index.js",
+    "dev": "bun run build:server && NODE_ENV=production node server/.build/server/index.js",
     "build": "bun run build:server && bun run build:client",
     "build:server": "cd server && (rm -r .build ||:) && tsc && cd ..",
     "build:client": "next build",
