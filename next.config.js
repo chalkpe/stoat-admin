@@ -3,6 +3,10 @@ const nextConfig = {
   experimental: {
     reactCompiler: true,
   },
+  webpackDevMiddleware: config => {
+    config.watchOptions = { ignored: '**/*' };
+    return config;
+  },
   webpack: (config, { dev, isServer, webpack, nextRuntime }) => {
     config.module.rules.push({
       test: /\.node$/,
