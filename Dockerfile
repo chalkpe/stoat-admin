@@ -5,7 +5,7 @@ RUN echo "* soft nofile 65536" >> /etc/security/limits.conf && \
     echo "* hard nofile 65536" >> /etc/security/limits.conf
 
 COPY . .
-RUN bun install --frozen-lockfile
+RUN bun install --frozen-lockfile && bun run build:server
 
 EXPOSE 3000/tcp
 ENTRYPOINT [ "bash", "-c", "ulimit -n 65536 && bun run dev" ]
