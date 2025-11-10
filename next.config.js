@@ -4,7 +4,9 @@ const nextConfig = {
     reactCompiler: true,
   },
   webpack: (config, { dev, isServer, webpack, nextRuntime }) => {
-    config.watch = false;
+    config.watchOptions = {
+      ignored: ['**/*'],
+    };
     config.module.rules.push({
       test: /\.node$/,
       use: [
