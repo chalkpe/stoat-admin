@@ -31,7 +31,7 @@ import {
 } from "./accountManagement";
 import { UserStrikes } from "./userManagement";
 
-type Props = { params: { id: string } };
+type Props = { params: Promise<{ id: string }> };
 
 const getUser = cache(async (id: string) => ({
   account: await fetchAccountById(id),
@@ -42,7 +42,8 @@ export async function generateMetadata(
   { params }: Props,
   // parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { account, user } = await getUser(params.id);
+  const { id } = await params;
+  const { account, user } = await getUser(id);
   if (!account && !user)
     return {
       title: "Not Found",
@@ -63,10 +64,11 @@ export const dynamic = "force-dynamic";
 export default async function User({ params }: Props) {
   await getScopedUser(RBAC_PERMISSION_MODERATION_AGENT);
 
-  const { account, user } = await getUser(params.id);
+  const { id } = await params;
+  const { account, user } = await getUser(id);
   if (!account && !user) notFound();
 
-  const strikes = await fetchStrikes(params.id);
+  const strikes = await fetchStrikes(id);
 
   //   const { messages: recentMessages, authors: recentMessageAuthors } =
   //     await fetchMessages({
@@ -103,14 +105,14 @@ export default async function User({ params }: Props) {
               </Flex>
 
               <ManageAccount
-                id={params.id}
+                id={id}
                 attempts={account.lockout?.attempts || 0}
               />
 
               <Flex direction="column" gap="2">
                 <Heading size="2">Email</Heading>
                 <ManageAccountEmail
-                  id={params.id}
+                  id={id}
                   email={account.email}
                   verified={account.verification.status !== "Pending"}
                 />
@@ -119,7 +121,7 @@ export default async function User({ params }: Props) {
               <Flex direction="column" gap="2">
                 <Heading size="2">Multi-Factor Authentication</Heading>
                 <ManageAccountMFA
-                  id={params.id}
+                  id={id}
                   totp={account.mfa?.totp_token?.status === "Enabled"}
                   recovery={account.mfa?.recovery_codes?.length || 0}
                 />
@@ -146,7 +148,7 @@ export default async function User({ params }: Props) {
               </Text>
             </Flex>
             <UserStrikes
-              id={params.id}
+              id={id}
               flags={user?.flags || 0}
               strikes={strikes}
             />
@@ -232,7 +234,7 @@ export default async function User({ params }: Props) {
             </Text>
           </Flex>
 
-          <Changelog object={{ type: "User", id: params.id }} />
+          <Changelog object={{ type: "User", id: id }} />
         </Flex>
       </Card>
     </>

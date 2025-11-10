@@ -4,7 +4,7 @@ import { getScopedUser } from "@/lib/auth";
 import { RBAC_PERMISSION_MODERATION_AGENT } from "@/lib/auth/rbacInternal";
 import { col } from "@/lib/db";
 import { CaseDocument, ReportDocument } from "@/lib/db/types";
-import { API } from "revolt.js";
+import { API } from "stoat.js";
 
 export type SearchResult = {
   id: string;

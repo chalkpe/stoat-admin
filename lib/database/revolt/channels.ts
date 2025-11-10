@@ -1,5 +1,5 @@
 import Revolt from "revolt-nodejs-bindings";
-import { API } from "revolt.js";
+import { API } from "stoat.js";
 
 import { callProcedure, createCollectionFn } from "..";
 

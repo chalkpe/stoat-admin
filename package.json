@@ -34,8 +34,8 @@
     "redis": "^4.6.13",
     "revolt-api": "^0.6.9",
     "revolt-nodejs-bindings": "0.7.15-rev0.0.2",
-    "revolt.js": "^7.0.0-beta.11",
     "scikitjs": "^1.24.0",
+    "stoat.js": "^7.3.4",
     "string-comparison": "^1.3.0",
     "ulid": "^2.3.0"
   },

@@ -1,6 +1,5 @@
 import { RedisClientType, createClient } from "@redis/client";
 import { readFile } from "node:fs/promises";
-import type { ProtocolV1 } from "revolt.js/lib/events/v1";
 
 export { RedisEventListener } from "./eventListener";
 
@@ -85,7 +84,7 @@ export async function newRedis() {
  * @param topic Topic
  * @param message Message
  */
-export async function publish(topic: string, message: ProtocolV1["server"]) {
+export async function publish(topic: string, message: unknown) {
   (await redis()).publish(topic, JSON.stringify(message));
 }
 
@@ -96,7 +95,7 @@ export async function publish(topic: string, message: ProtocolV1["server"]) {
  */
 export async function publishPrivate(
   topic: string,
-  message: ProtocolV1["server"],
+  message: unknown,
 ) {
   const privateTopic = `${topic}!`;
   await publish(privateTopic, message);

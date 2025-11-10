@@ -104,15 +104,6 @@ export function UserCard({
             </DropdownMenu.Root>
           </Flex>
         )}
-
-        {showProfile && (
-          <Flex direction="column" gap="2">
-            <Heading size="2">Profile Bio</Heading>
-            <Card>
-              <Markdown>{user.profile?.content ?? "No profile bio."}</Markdown>
-            </Card>
-          </Flex>
-        )}
       </Flex>
     </Card>
   );

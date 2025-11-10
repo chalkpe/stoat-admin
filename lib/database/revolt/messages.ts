@@ -1,5 +1,5 @@
 import { publish } from "@/lib/events";
-import { API } from "revolt.js";
+import { API } from "stoat.js";
 import { ulid } from "ulid";
 
 import { createCollectionFn } from "..";

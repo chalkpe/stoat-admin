@@ -1,5 +1,4 @@
 import type { RedisClientType } from "redis";
-import type { ProtocolV1 } from "revolt.js/lib/events/v1";
 
 import { newRedis } from ".";
 
@@ -41,5 +40,5 @@ export abstract class RedisEventListener {
     }
   }
 
-  abstract handle(event: ProtocolV1["server"]): void;
+  abstract handle(event: unknown): void;
 }
