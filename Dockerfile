@@ -1,11 +1,8 @@
-FROM oven/bun:1
+FROM node:24
 WORKDIR /app
 
-RUN echo "* soft nofile 524288" >> /etc/security/limits.conf && \
-    echo "* hard nofile 524288" >> /etc/security/limits.conf
-
 COPY . .
-RUN bun install --frozen-lockfile && bun run build:server
+RUN npm install --frozen-lockfile && npm run build
 
 EXPOSE 3000/tcp
-ENTRYPOINT [ "bash", "-c", "ulimit -n 524288 && bun run dev" ]
+ENTRYPOINT [ "npm", "run", "start" ]
